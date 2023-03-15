@@ -1,0 +1,5 @@
+INDEX VERSION 1.131
+C:\stswork\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\943555260.index
+\SampleSpring\src\main\java
+C:\stswork\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2016147559.index
+\SampleSpring\src\main\java

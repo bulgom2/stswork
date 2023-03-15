@@ -1,0 +1,6 @@
+package sample.spring.codehows;
+
+@Controller
+public class BookController {
+
+}
