@@ -1,7 +1,0 @@
-package sample.spring.codehows;
-import org.springframework.stereotype.Controller;
-
-@Controller
-public class BookController {
-
-}

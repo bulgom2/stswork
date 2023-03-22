@@ -10,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import lombok.extern.log4j.Log4j;
 
@@ -33,6 +37,24 @@ public class SampleController {
 		binder.registerCustomEditor(java.util.Date.class,  new CustomDateEditor(dateFormat, false));
 	}
 	*/
+	
+	@ExceptionHandler(Exception.class)
+	public String except(Exception ex, Model model) {
+		
+		log.error("Exception......." + ex.getMessage());
+		model.addAttribute("exception", ex);
+		log.error(model);
+		
+		return "error_page";
+	}
+	
+	@ExceptionHandler(NoHandlerFoundException.class)
+	@ResponseStatus(HttpStatus.NOT_FOUND)
+	public String handle404(NoHandlerFoundException ex) {
+		
+		return "custom404";
+	}
+	
 	@RequestMapping("")
 	public void basic() {
 		
@@ -154,4 +176,6 @@ public class SampleController {
 			log.info("size: " + file.getSize());
 		});
 	}
+	
+
 }
