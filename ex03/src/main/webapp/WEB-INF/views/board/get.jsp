@@ -62,6 +62,130 @@
 </div>
 <!--  /.row -->
 
+
+<!-- 
+<script type="text/javascript">
+	$(document).ready(function() {
+		
+		console.log(replyService);
+	});
+	
+	console.log("==================");
+	console.log("JS TEST");
+	
+	var bnoValue = '<c:out value="${board.bno}"/>';
+
+	// for replyService add test
+	replyService.add(
+		{reply:"JS Test", replyer:"tester", bno:bnoValue},
+		function(result){
+			alert("RESULT: " + result);
+		});
+
+	replyService.getList(
+		{bno:bnoValue, page:1},
+		function(list){
+			for (var i=0, len=list.length||0; i<len; i++) {
+				console.log(list[i]);
+			}
+		});
+	
+	replyService.remove(17, function(count) {
+		console.log(count);
+		
+		if (count === "success") {
+			alert("REMOVED");
+		}
+	}, function(err) {
+		alert('ERROR...');
+	});
+
+	replyService.update({
+		rno : 3,
+		bno : bnoValue,
+		reply : "Modified Reply...."
+	}, function(result) {
+		alert("수정 완료...");
+	});
+
+	function get(rno, callback, error) {
+		
+		$.get("/replies/" + rno + ".json", function(result) {
+			
+			if (callback) {
+				callback(reslut);
+			}
+		}).fail(function(xhr, status, err) {
+			if (error) {
+				error();
+			}
+		});
+	}
+
+	return {
+		add : add,
+		getList : getList,
+		remove : remove,
+		update : update,
+		get : get
+	};
+})();
+
+</script>
+
+ -->
+
+<script type="text/javascript" src="/resources/js/reply.js"></script>
+
+<script>
+console.log("==================");
+console.log("JS TEST");
+
+var bnoValue = '<c:out value="${board.bno}"/>';
+
+//for replyService add test
+replyService.add(
+	{reply:"JS Test", replyer:"tester", bno:bnoValue},
+	function(result){
+		alert("RESULT: " + result);
+	}
+);
+
+// reply List Test
+replyService.getList({bno:bnoValue, page:1}, function(list) {
+    for(var i = 0, len = list.length || 0; i < len; i++){
+       console.log(list[i]);
+    }
+ });
+ 
+ // 댓글 삭제 테스트
+replyService.remove(2, function(count) {
+    console.log(count);
+    
+    if(count === "success") {
+       alert("REMOVED");
+    }
+ }, function(err) {
+    alert('ERROR...');
+ });
+ 
+ // 댓글 수정
+replyService.update({
+	rno : 3,
+	bno : bnoValue,
+	reply : "modified Reply...."
+}, function(result) {
+	alert("수정 완료...");
+	}
+);
+
+ // 댓글 번호 전달
+replyService.get(10, function(data){
+	console.log(data);
+})
+
+</script>
+
 <script type="text/javascript">
 $(document).ready(function() {
 	var operForm = $("#operForm");
